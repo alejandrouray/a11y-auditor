@@ -15,8 +15,10 @@ export type Env = z.infer<typeof EnvSchema>;
 
 export function parseEnv(source: Record<string, string | undefined>): Env {
   const result = EnvSchema.safeParse(source);
+
   if (!result.success) {
     throw new Error(result.error.issues.map((i) => i.message).join("; "));
   }
+
   return result.data;
 }
