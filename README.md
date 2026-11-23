@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# job-fit-agent
 
-## Getting Started
+An AI agent that reads job postings and explains how well they fit a candidate profile:
+location and language vetoes, a fit score, and an explanation grounded in the posting.
 
-First, run the development server:
+> **Status:** under construction. Built in public as a learning project in AI product engineering.
+> The demo uses sample postings and a fictional candidate profile only: no real personal data.
+
+## Stack
+
+- **Next.js** (App Router) + **TypeScript** + React
+- **Vercel AI SDK** for streaming chat, structured output and tool calling
+- **zod** for schemas (model outputs, tools, environment)
+- **Vitest** for tests, **GitHub Actions** for CI
+
+Planned: Langfuse (observability), evals in CI, PostgreSQL + pgvector (retrieval).
+
+## Roadmap
+
+1. **LLM integration:** streaming chat UI, structured posting extraction, typed tools.
+2. **Observability:** traces with cost, latency and every agent step.
+3. **Agent:** a hand-written loop with step limits and guardrails, plus documented
+   "rule vs agent" decisions for each step.
+4. **Evals:** hand-labelled cases, code-based checks first, LLM-as-judge only where needed, run in CI.
+5. **Retrieval:** pgvector hybrid search over profile, projects and postings.
+6. **Production:** public demo with rate and cost limits.
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+cp .env.example .env.local   # add your API key
+npm run dev                  # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Scripts
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+| Command | What it does |
+|---|---|
+| `npm run dev` | Start the dev server |
+| `npm run lint` | ESLint |
+| `npm run typecheck` | TypeScript, no emit |
+| `npm test` | Vitest (run once) |
+| `npm run build` | Production build |
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## License
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
