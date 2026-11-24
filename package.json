@@ -2,6 +2,7 @@
   "name": "a11y-auditor",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -9,9 +10,11 @@
     "lint": "eslint",
     "typecheck": "next typegen && tsc --noEmit",
     "test": "vitest run",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "ai:hello": "node --env-file-if-exists=.env.local scripts/hello-stream.ts"
   },
   "dependencies": {
+    "@ai-sdk/anthropic": "^4.0.107",
     "ai": "^7.0.180",
     "next": "16.4.6",
     "react": "19.3.0",
