@@ -74,6 +74,7 @@ export async function createChatResponse({
       sendReasoning: false,
       onError: (error) => {
         console.error("[chat] provider error", error);
+
         return PROVIDER_ERROR_MESSAGE;
       },
     }),

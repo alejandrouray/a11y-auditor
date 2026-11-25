@@ -94,12 +94,14 @@ describe("createChatResponse", () => {
     await (await createChatResponse({ messages: [userMessage], model })).text();
 
     const call = model.doStreamCalls[0];
+
     expect(call.maxOutputTokens).toBe(MAX_OUTPUT_TOKENS);
     expect(JSON.stringify(call.prompt)).toContain(CHAT_INSTRUCTIONS);
   });
 
   it("turns a provider failure into a safe error message", async () => {
     vi.spyOn(console, "error").mockImplementation(() => {});
+
     const model = new MockLanguageModelV4({
       doStream: async () => {
         throw new Error("401 invalid x-api-key sk-secret");

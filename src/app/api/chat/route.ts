@@ -12,6 +12,7 @@ export async function POST(request: Request): Promise<Response> {
     ({ messages } = await parseChatRequest(await request.json()));
   } catch (error) {
     const message = error instanceof Error ? error.message : "Invalid request body";
+
     return Response.json({ error: message }, { status: 400 });
   }
 

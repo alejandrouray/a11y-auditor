@@ -17,8 +17,11 @@ export function Chat() {
 
   function handleSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
+
     const text = input.trim();
+
     if (!text || busy) return;
+
     void sendMessage({ text });
     setInput("");
   }

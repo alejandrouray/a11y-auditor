@@ -17,6 +17,7 @@ const { text, usage: callUsage } = await generateText({
   model,
   prompt: "In one sentence: what is WCAG?",
 });
+
 console.log(`generateText:\n${text}`);
 console.log(`tokens: ${callUsage.inputTokens} in / ${callUsage.outputTokens} out\n`);
 
@@ -25,9 +26,13 @@ const result = streamText({
   model,
   prompt: "In three short bullet points: why do images need alt text?",
 });
+
 console.log("streamText:");
+
 for await (const chunk of result.textStream) {
   process.stdout.write(chunk);
 }
+
 const usage = await result.usage;
+
 console.log(`\ntokens: ${usage.inputTokens} in / ${usage.outputTokens} out`);
