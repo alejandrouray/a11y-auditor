@@ -13,12 +13,12 @@ const anthropic = createAnthropic({ apiKey: env.AI_PROVIDER_API_KEY });
 const model = anthropic(MODEL_ID);
 
 // 1. generateText: waits for the whole answer, then returns it at once.
-const { text, totalUsage } = await generateText({
+const { text, usage: callUsage } = await generateText({
   model,
   prompt: "In one sentence: what is WCAG?",
 });
 console.log(`generateText:\n${text}`);
-console.log(`tokens: ${totalUsage.inputTokens} in / ${totalUsage.outputTokens} out\n`);
+console.log(`tokens: ${callUsage.inputTokens} in / ${callUsage.outputTokens} out\n`);
 
 // 2. streamText: returns immediately; the text arrives in chunks.
 const result = streamText({
@@ -29,5 +29,5 @@ console.log("streamText:");
 for await (const chunk of result.textStream) {
   process.stdout.write(chunk);
 }
-const usage = await result.totalUsage;
+const usage = await result.usage;
 console.log(`\ntokens: ${usage.inputTokens} in / ${usage.outputTokens} out`);
