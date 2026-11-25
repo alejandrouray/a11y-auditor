@@ -1,7 +1,7 @@
 "use client";
 
 import { useChat } from "@ai-sdk/react";
-import { useState, type SubmitEvent } from "react";
+import { useRef, useState, type SubmitEvent } from "react";
 
 /** Status labels announced to screen readers while an answer is in progress. */
 const STATUS_LABEL = {
@@ -10,8 +10,9 @@ const STATUS_LABEL = {
 } as const;
 
 export function Chat() {
-  const { messages, sendMessage, status, stop, error, regenerate, clearError } = useChat();
+  const { messages, sendMessage, status, stop, error, regenerate, clearError, setMessages } = useChat();
   const [input, setInput] = useState("");
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const busy = status === "submitted" || status === "streaming";
 
@@ -24,6 +25,14 @@ export function Chat() {
 
     void sendMessage({ text });
     setInput("");
+  }
+
+  function handleNewConversation() {
+    clearError();
+    setMessages([]);
+
+    // The button unmounts once the chat is empty, so move focus somewhere useful.
+    inputRef.current?.focus();
   }
 
   return (
@@ -90,6 +99,7 @@ export function Chat() {
         </label>
         <input
           id="chat-input"
+          ref={inputRef}
           value={input}
           onChange={(event) => setInput(event.target.value)}
           placeholder="Why does my icon button fail WCAG?"
@@ -101,13 +111,20 @@ export function Chat() {
             Stop
           </button>
         ) : (
-          <button
-            type="submit"
-            disabled={!input.trim()}
-            className="rounded-md bg-zinc-900 px-4 py-2 text-white disabled:opacity-50 dark:bg-zinc-100 dark:text-zinc-900"
-          >
-            Send
-          </button>
+          <>
+            <button
+              type="submit"
+              disabled={!input.trim()}
+              className="rounded-md bg-zinc-900 px-4 py-2 text-white disabled:opacity-50 dark:bg-zinc-100 dark:text-zinc-900"
+            >
+              Send
+            </button>
+            {messages.length > 0 && (
+              <button type="button" onClick={handleNewConversation} className="rounded-md border px-4 py-2">
+                New conversation
+              </button>
+            )}
+          </>
         )}
       </form>
     </section>
