@@ -330,5 +330,28 @@
         "description": "The html element has no lang attribute, so screen readers may use the wrong pronunciation."
       }
     ]
+  },
+  {
+    "id": "21-area-missing-or-meaningless-alt",
+    "file": "21-area-missing-or-meaningless-alt.html",
+    "category": "images",
+    "issues": [
+      {
+        "wcag": "4.1.2",
+        "axeRule": "area-alt",
+        "impact": "critical",
+        "selector": "map[name='map-1'] area",
+        "detectableByAxe": true,
+        "description": "The area has no alt attribute, so screen readers announce the file name or nothing."
+      },
+      {
+        "wcag": "4.1.2",
+        "axeRule": null,
+        "impact": "critical",
+        "selector": "map[name='map-2'] area",
+        "detectableByAxe": false,
+        "description": "The area has an alt attribute that is meaningless."
+      }
+    ]
   }
 ]

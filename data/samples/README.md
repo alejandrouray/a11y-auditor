@@ -1,6 +1,6 @@
 # Accessibility samples
 
-20 small HTML snippets, each with accessibility failures we know about in advance. They are the test set for the auditor: the structured output (task 1.5), the axe-core tool (task 1.6), and later the evals and RAG.
+Small HTML snippets (21 so far), each with accessibility failures we know about in advance. They are the test set for the auditor: the structured output (task 1.5), the axe-core tool (task 1.6), and later the evals and RAG.
 
 ## Files
 
@@ -20,7 +20,7 @@ Each expected issue has:
 
 ## What the split means
 
-13 of the 24 issues have an axe rule. The other 11 (a useless `alt`, a placeholder used as label, focus that is not managed, link text like "Click here"...) need judgment, so they are what the model has to add on top of axe.
+14 of the 26 issues have an axe rule. The other 12 (a useless `alt`, a placeholder used as label, focus that is not managed, link text like "Click here"...) need judgment, so they are what the model has to add on top of axe.
 
 ## Known caveats (to check in task 1.6)
 

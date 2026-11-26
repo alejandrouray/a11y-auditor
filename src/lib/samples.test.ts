@@ -20,8 +20,8 @@ describe("the sample dataset", () => {
     samples = await loadSamples();
   });
 
-  it("has 20 samples, each with HTML", () => {
-    expect(samples).toHaveLength(20);
+  it("has at least 21 samples, each with HTML", () => {
+    expect(samples.length).toBeGreaterThanOrEqual(21);
 
     for (const sample of samples) {
       expect(sample.html.trim(), sample.id).not.toBe("");
