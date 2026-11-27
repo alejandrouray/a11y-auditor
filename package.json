@@ -11,7 +11,8 @@
     "typecheck": "next typegen && tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "ai:hello": "node --env-file-if-exists=.env.local scripts/hello-stream.ts"
+    "ai:hello": "node --env-file-if-exists=.env.local scripts/hello-stream.ts",
+    "ai:audit": "node --env-file-if-exists=.env.local scripts/audit-sample.ts"
   },
   "dependencies": {
     "@ai-sdk/anthropic": "^4.0.107",

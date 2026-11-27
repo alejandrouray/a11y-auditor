@@ -8,6 +8,9 @@ export const SAMPLES_DIR = path.join(process.cwd(), "data", "samples");
 /** Same impact levels axe-core uses, so expected and found issues compare directly. */
 export const IMPACTS = ["minor", "moderate", "serious", "critical"] as const;
 
+/** A WCAG success criterion such as `1.4.3`. */
+export const WCAG_CRITERION = /^[1-4]\.\d{1,2}\.\d{1,2}$/;
+
 export const CATEGORIES = [
   "images",
   "forms",
@@ -24,7 +27,7 @@ export const CATEGORIES = [
  */
 const ExpectedIssueSchema = z
   .object({
-    wcag: z.string().regex(/^[1-4]\.\d{1,2}\.\d{1,2}$/, "wcag must be a success criterion like 1.4.3"),
+    wcag: z.string().regex(WCAG_CRITERION, "wcag must be a success criterion like 1.4.3"),
     axeRule: z.string().min(1).nullable(),
     impact: z.enum(IMPACTS),
     selector: z.string().min(1),
